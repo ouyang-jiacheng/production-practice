@@ -1,0 +1,35 @@
+# Программа расчета выполнения сменного задания
+# Автор: Оуян Цзячэн
+# Дата: 10.03.2026
+
+def main():
+    print("Расчет выполнения сменного задания")
+    print("----------------------------------")
+    
+    product = input("Введите название продукта: ")
+    try:
+        plan = float(input("Введите плановое задание (тонн): "))
+        fact = float(input("Введите фактически произведено (тонн): "))
+    except ValueError:
+        print("Ошибка: введите числа!")
+        return
+    
+    if plan == 0:
+        print("План не может быть нулевым.")
+        return
+    
+    percent = (fact / plan) * 100
+    result = "План выполнен" if fact >= plan else "План не выполнен"
+    
+    print(f"\nПродукт: {product}")
+    print(f"План: {plan} т, Факт: {fact} т")
+    print(f"Процент выполнения: {percent:.2f}%")
+    print(f"Результат: {result}")
+    
+    with open("shift_results.txt", "a", encoding="utf-8") as f:
+        f.write(f"{product};{plan};{fact};{percent:.2f};{result}\n")
+    print("\nРезультат сохранен в файл shift_results.txt")
+
+if __name__ == "__main__":
+main()
+ 
